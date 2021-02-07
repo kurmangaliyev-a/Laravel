@@ -9,7 +9,16 @@
                     <div class="card">{{$post->descr}}</div>
                     <div class="card-author">Автор: {{$post->name}}</div>
                     <div class="card-date">Пост создан: {{$post->created_at->diffForHumans()}}</div>
-                    <a href="{{ route('post.index') }}" class="btn btn-light">На главную </a>
+
+                    <div class="card-btn">
+                        <a href="{{ route('post.edit', ['id'=>$post->post_id]) }}" class="btn btn-warning">Редактировать</a>
+                        <form action = "{{route('post.destroy',['id'=>$post->post_id])}}" method="post">
+                                @csrf
+                                @method('DELETE');
+                                <input type="submit" class="btn btn-danger" value="удалить">
+                        </form>
+                        <a href="{{ route('post.index') }}" class="btn btn-light">На главную </a>
+                    </div>
                 </div>
             </div>
         </div>

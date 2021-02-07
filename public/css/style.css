@@ -21,3 +21,9 @@ nav{
 .card-img__max{
     height: 500px;
 }
+.card-btn{
+    display:flex;
+}
+.card-btn a{
+    margin-right: 10px;
+}

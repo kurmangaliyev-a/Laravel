@@ -89,6 +89,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::find($id);
+        return view('posts.edit',compact('post'));
     }
 
     /**
@@ -101,6 +103,19 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->short_title = Str::length($request->title)>30 ? Str::substr($request->title,0,30).'...' : $request->title;
+        $post->descr = $request->descr;
+        if ($request->file('img')){
+            $path = Storage::putFile('public', $request->file('img'));
+            $url = Storage::url($path);
+            $post->img = $url;
+        }
+        $post->update();
+        $id = $post->post_id;
+        return redirect()->route('post.show',compact('id'))->with('success','Пост успешно отредактирован!');
+
     }
 
     /**
@@ -112,5 +127,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('post.index')->with('success','Пост успешно удалён!');
     }
 }
