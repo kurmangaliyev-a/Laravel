@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout',['title'=>'Пост №'.$post->post_id.' '.$post->short_title])
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -12,7 +12,8 @@
 
                     <div class="card-btn">
                         <a href="{{ route('post.edit', ['id'=>$post->post_id]) }}" class="btn btn-warning">Редактировать</a>
-                        <form action = "{{route('post.destroy',['id'=>$post->post_id])}}" method="post">
+                        <form action = "{{route('post.destroy',['id'=>$post->post_id])}}" method="post"
+                        onsubmit="if(confirm('Точно удалить пост?')) {return true} else {return false}">
                                 @csrf
                                 @method('DELETE');
                                 <input type="submit" class="btn btn-danger" value="удалить">
