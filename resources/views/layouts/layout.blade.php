@@ -8,6 +8,7 @@
     <title>{{$title}}</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="shortcut icon" href="{{asset('img/icon.png')}}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
